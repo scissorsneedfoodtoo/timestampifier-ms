@@ -9,21 +9,24 @@ router.get('/', function(req, res, next) {
 
 router.get('/:time', function(req, res) {
   var input = normalize(req.params.time)
-  var numCheck = parseInt(input)
+  // check for number string
+  var isNaN = Number.isNaN(Number(input))
   var unixTime = null
   var naturalTime = null
   //check for any character in the param string
   var regEx = /[A-Za-z-]/g
 
-  if (input.match(regEx) && moment(input).isValid()) {
+  // check if input is a number first, then if not, check if it is a valid date
+  if (!isNaN) {
+    unixTime = input
+    naturalTime = moment.unix(input).format('MMMM Do, YYYY')
+  } else if (input.match(regEx) && moment(input).isValid()) {
     naturalTime = moment(input).format('MMMM Do, YYYY')
     unixTime = moment(input).unix().toString()
-  } else if (numCheck) {
-    unixTime = numCheck.toString()
-    naturalTime = moment.unix(numCheck).format('MMMM Do, YYYY')
   }
 
-  res.json( outputer(unixTime, naturalTime) )
+  // return timestamp object with new values or null
+  return res.json( outputer(unixTime, naturalTime) )
 })
 
 function normalize(str) {

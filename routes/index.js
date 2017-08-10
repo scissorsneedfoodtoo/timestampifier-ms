@@ -26,7 +26,7 @@ router.get('/:time', function(req, res) {
   }
 
   // return timestamp object with new values or null
-  return res.json( outputer(unixTime, naturalTime) )
+  return res.json({unix: unixTime, natural: naturalTime})
 })
 
 function normalize(str) {
@@ -38,10 +38,6 @@ function normalize(str) {
   newStr = newStr.replace(/\./g,'-')
 
   return newStr
-}
-
-function outputer(a, b) {
-  return { unix: a, natural: b}
 }
 
 module.exports = router;

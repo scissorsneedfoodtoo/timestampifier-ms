@@ -2,6 +2,10 @@
   "name": "timestampifier-ms",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "4.2.6",
+    "npm": "5.3.0"
+  },
   "scripts": {
     "start": "node ./bin/www"
   },

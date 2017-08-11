@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Timestampifier Micro Service'});
+  res.render('index', { title: 'Timestampifier Microservice'});
 });
 
 router.get('/:time', function(req, res) {
